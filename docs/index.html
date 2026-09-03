@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Refresh Opportunity Scoring</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="hero">
+  <h1>Refresh Opportunity Scoring</h1>
+  <p class="subtitle">
+    A Transparent Machine Learning Framework for Prioritizing Content Reviews
+  </p>
+  <p>Praveen • FlyRank ML Internship Capstone</p>
+</header>
+
+<main>
+
+<section>
+  <h2>Abstract</h2>
+  <p>
+    This research investigates whether observable search-performance signals can
+    prioritize which content pages deserve editorial review first. Using the
+    FlyRank ML Internship warehouse, I analyzed March 2026 search and engagement
+    data while excluding future-window information to prevent leakage. I built a
+    transparent rule-based baseline alongside a Random Forest model using
+    impressions, clicks, CTR, average position, and sessions. The machine
+    learning model improved refresh-opportunity identification while preserving
+    explainability through feature importance. The resulting system is intended as
+    a decision-support tool for SEO teams rather than an automated publishing
+    system.
+  </p>
+</section>
+
+<section>
+  <h2>Introduction</h2>
+  <p>
+    Large websites contain thousands of content pages, but editorial teams have
+    limited time. Choosing which pages to refresh is a ranking problem, not a
+    prediction problem. This project builds a transparent scoring framework that
+    ranks pages using observable search signals and converts the output into clear
+    editorial recommendations.
+  </p>
+</section>
+
+<section>
+  <h2>Data</h2>
+  <table>
+    <tr><th>Property</th><th>Value</th></tr>
+    <tr><td>Dataset</td><td>FlyRank ML Internship Warehouse</td></tr>
+    <tr><td>Table</td><td>fact_content_daily_performance</td></tr>
+    <tr><td>Time Window</td><td>March 2026</td></tr>
+    <tr><td>Unit</td><td>One content page × client × day</td></tr>
+    <tr><td>Excluded</td><td>Client names, URLs, private queries & future metrics</td></tr>
+  </table>
+</section>
+
+<section>
+  <h2>Methodology</h2>
+
+  <h3>Features</h3>
+  <ul>
+    <li>Search impressions</li>
+    <li>Search clicks</li>
+    <li>Click-through rate (CTR)</li>
+    <li>Average search position</li>
+    <li>GA4 sessions</li>
+  </ul>
+
+  <h3>Baseline</h3>
+  <p>
+    Refresh Score = 45% Visibility + 35% Position Opportunity + 20% CTR Gap.
+  </p>
+
+  <h3>Validation</h3>
+  <p>
+    Both the baseline and the Random Forest model were evaluated on the same
+    train/test split. No future-window or product-generated fields were used.
+  </p>
+</section>
+
+<section>
+  <h2>Results</h2>
+
+  <div class="chart">
+    <img src="assets/feature_importance.png" alt="Feature Importance">
+    <p>Figure 1. Feature importance from the Random Forest model.</p>
+  </div>
+
+  <div class="chart">
+    <img src="assets/baseline_vs_model.png" alt="Baseline vs Model">
+    <p>Figure 2. F1 score comparison between the rule-based baseline and the ML model.</p>
+  </div>
+
+  <div class="chart">
+    <img src="assets/score_distribution.png" alt="Score Distribution">
+    <p>Figure 3. Distribution of refresh opportunity scores.</p>
+  </div>
+
+  <p>
+    The Random Forest consistently outperformed the transparent baseline while
+    using the same observable features. Average position and CTR contributed the
+    strongest predictive value.
+  </p>
+</section>
+
+<section>
+  <h2>Limitations</h2>
+  <p>
+    This project identifies pages associated with stronger refresh opportunities
+    using historical observational data. It does not prove that refreshing a page
+    will increase Google rankings or traffic. The recommendations should be
+    interpreted as observed, directional, and decision-support.
+  </p>
+</section>
+
+<section>
+  <h2>Ranked Recommendations</h2>
+  <table>
+    <tr>
+      <th>Reason Code</th>
+      <th>Editorial Action</th>
+    </tr>
+    <tr>
+      <td>LOW_CTR_VISIBLE</td>
+      <td>Review title and meta description</td>
+    </tr>
+    <tr>
+      <td>LOW_CTR_VISIBLE</td>
+      <td>Improve search snippet</td>
+    </tr>
+    <tr>
+      <td>MONITOR</td>
+      <td>Track performance before editing</td>
+    </tr>
+  </table>
+</section>
+
+<section>
+  <h2>Reproducibility</h2>
+  <p>
+    All notebooks, feature engineering, baseline scoring, and model evaluation
+    are available in the accompanying GitHub repository.
+  </p>
+</section>
+
+<section>
+  <h2>Acknowledgments</h2>
+  <p>
+    Built on the FlyRank ML Internship dataset.
+    Data provided by <a href="https://flyrank.ai" target="_blank">FlyRank</a>
+    for educational and research purposes.
+  </p>
+</section>
+
+</main>
+
+<footer>
+  © 2026 Praveen • Machine Learning Capstone
+</footer>
+
+</body>
+</html>
